@@ -1,0 +1,214 @@
+Country Name,Country Code,alpha-2,schoolOECD,waste,lnyUN,GINIW,polity
+Afghanistan,AFG,AF,6,6,3,6,5
+Albania,ALB,AL,9,6,6,6,10
+Algeria,DZA,DZ,6,8,6,5,6
+American Samoa,ASM,AS,..,..,..,..,..
+Andorra,AND,AD,..,..,8,..,..
+Angola,AGO,AO,1,8,5,4,5
+Antigua and Barbuda,ATG,AG,8,..,7,..,..
+Argentina,ARG,AR,9,10,7,4,10
+Armenia,ARM,AM,9,8,6,5,8
+Aruba,ABW,AW,8,..,8,..,..
+Australia,AUS,AU,10,10,9,5,10
+Austria,AUT,AT,10,..,8,6,10
+Azerbaijan,AZE,AZ,9,9,6,5,2
+"Bahamas, The",BHS,BS,8,..,8,4,..
+Bahrain,BHR,BH,9,7,7,..,1
+Bangladesh,BGD,BD,7,4,4,3,6
+Barbados,BRB,BB,10,7,7,3,..
+Belarus,BLR,BY,10,9,6,6,2
+Belgium,BEL,BE,10,..,8,6,9
+Belize,BLZ,BZ,8,9,6,3,..
+Benin,BEN,BJ,5,8,4,4,9
+Bermuda,BMU,BM,8,..,9,..,..
+Bhutan,BTN,BT,7,8,5,5,8
+Bolivia,BOL,BO,7,9,5,3,9
+Bosnia and Herzegovina,BIH,BA,..,9,6,5,6
+Botswana,BWA,BW,5,7,6,3,9
+Brazil,BRA,BR,8,9,7,3,9
+British Virgin Islands,VGB,VG,..,..,8,..,..
+Brunei Darussalam,BRN,BN,9,9,8,..,..
+Bulgaria,BGR,BG,9,9,6,5,10
+Burkina Faso,BFA,BF,3,7,3,5,8
+Burundi,BDI,BI,4,8,2,5,5
+Cabo Verde,CPV,CV,7,7,5,3,10
+Cambodia,KHM,KH,5,6,4,6,4
+Cameroon,CMR,CM,5,8,4,3,4
+Canada,CAN,CA,10,..,8,5,10
+Cayman Islands,CYM,KY,..,..,9,..,..
+Central African Republic,CAF,CF,2,7,3,2,8
+Chad,TCD,TD,2,5,4,4,5
+Chile,CHL,CL,10,10,7,3,10
+China,CHN,CN,..,9,6,10,2
+Colombia,COL,CO,8,10,6,3,9
+Comoros,COM,KM,5,6,4,2,10
+"Congo, Dem. Rep.",COD,CD,2,7,3,4,4
+"Congo, Rep.",COG,CG,4,7,5,3,4
+Costa Rica,CRI,CR,8,10,7,3,10
+Cote d'Ivoire,CIV,CI,4,8,4,4,7
+Croatia,HRV,HR,10,..,7,6,10
+Cuba,CUB,CU,10,9,6,6,2
+Cyprus,CYP,CY,10,..,8,5,10
+Czech Republic,CZE,CZ,10,8,7,6,10
+Denmark,DNK,DK,10,..,9,6,10
+Djibouti,DJI,DJ,4,1,4,4,7
+Dominica,DMA,DM,9,..,6,..,..
+Dominican Republic,DOM,DO,7,9,6,4,9
+Ecuador,ECU,EC,9,9,6,4,8
+"Egypt, Arab Rep.",EGY,EG,9,6,5,3,4
+El Salvador,SLV,SV,7,9,5,4,9
+Equatorial Guinea,GNQ,GQ,2,9,7,..,3
+Eritrea,ERI,ER,3,4,3,..,2
+Estonia,EST,EE,10,..,7,5,10
+Eswatini,SWZ,SZ,3,9,5,3,1
+Ethiopia,ETH,ET,4,6,3,6,4
+Faroe Islands,FRO,FO,..,..,..,..,..
+Fiji,FJI,FJ,9,8,6,4,6
+Finland,FIN,FI,10,..,8,6,10
+France,FRA,FR,10,..,8,6,10
+French Polynesia,PYF,PF,..,..,7,..,..
+Gabon,GAB,GA,..,9,6,4,7
+"Gambia, The",GMB,GM,6,6,3,3,7
+Georgia,GEO,GE,9,9,5,4,9
+Germany,DEU,DE,10,10,8,6,10
+Ghana,GHA,GH,5,8,4,10,9
+Gibraltar,GIB,GI,..,..,..,..,..
+Greece,GRC,GR,10,..,7,5,10
+Greenland,GRL,GL,..,..,8,..,..
+Grenada,GRD,GD,9,..,6,..,..
+Guam,GUM,GU,..,..,..,..,..
+Guatemala,GTM,GT,5,10,5,3,9
+Guinea,GIN,GN,4,7,4,5,7
+Guinea-Bissau,GNB,GW,1,8,3,3,8
+Guyana,GUY,GY,9,7,5,5,9
+Haiti,HTI,HT,..,8,3,1,8
+Honduras,HND,HN,5,9,5,3,8
+"Hong Kong SAR, China",HKG,HK,9,..,8,2,..
+Hungary,HUN,HU,10,..,7,6,10
+Iceland,ISL,IS,10,..,8,7,..
+India,IND,IN,8,2,5,10,10
+Indonesia,IDN,ID,8,5,5,5,10
+"Iran, Islamic Rep.",IRN,IR,9,8,6,5,2
+Iraq,IRQ,IQ,5,7,6,6,8
+Ireland,IRL,IE,10,..,9,6,10
+Isle of Man,IMN,IM,..,..,..,..,..
+Israel,ISR,IL,10,..,8,5,8
+Italy,ITA,IT,10,..,8,5,10
+Jamaica,JAM,JM,7,9,6,3,10
+Japan,JPN,JP,10,9,8,10,10
+Jordan,JOR,JO,7,9,5,5,4
+Kazakhstan,KAZ,KZ,10,9,7,6,3
+Kenya,KEN,KE,4,8,4,4,10
+Kiribati,KIR,KI,9,5,4,5,..
+"Korea, Dem. People’s Rep.",PRK,KP,10,8,3,..,1
+"Korea, Rep.",KOR,KR,10,10,8,6,9
+Kuwait,KWT,KW,9,9,8,..,2
+Kyrgyz Republic,KGZ,KG,10,9,4,6,9
+Lao PDR,LAO,LA,6,7,4,4,2
+Latvia,LVA,LV,9,..,7,5,9
+Lebanon,LBN,LB,7,7,6,5,8
+Lesotho,LSO,LS,4,9,4,2,9
+Liberia,LBR,LR,2,8,3,5,8
+Libya,LBY,LY,6,7,5,..,6
+Liechtenstein,LIE,LI,9,..,10,..,..
+Lithuania,LTU,LT,10,..,7,4,10
+Luxembourg,LUX,LU,10,..,9,6,10
+"Macao SAR, China",MAC,MO,9,..,8,..,..
+"Macedonia, FYR",MKD,MK,10,9,6,5,10
+Madagascar,MDG,MG,3,4,3,4,8
+Malawi,MWI,MW,4,9,3,5,8
+Malaysia,MYS,MY,9,5,7,4,8
+Maldives,MDV,MV,5,6,6,5,..
+Mali,MLI,ML,4,5,4,5,8
+Malta,MLT,MT,10,..,8,6,..
+Marshall Islands,MHL,MH,7,..,5,..,..
+Mauritania,MRT,MR,3,4,4,5,5
+Mauritius,MUS,MU,9,4,7,5,10
+Mexico,MEX,MX,9,10,7,3,9
+"Micronesia, Fed. Sts.",FSM,FM,7,..,5,4,..
+Moldova,MDA,MD,9,9,5,6,10
+Monaco,MCO,MC,..,..,10,..,..
+Mongolia,MNG,MN,9,10,5,5,10
+Montenegro,MNE,ME,10,9,6,5,10
+Morocco,MAR,MA,6,9,5,5,4
+Mozambique,MOZ,MZ,2,8,3,5,8
+Myanmar,MMR,MM,6,7,4,10,9
+Namibia,NAM,NA,6,7,6,1,8
+Nauru,NRU,NR,8,10,7,..,..
+Nepal,NPL,NP,6,6,3,5,8
+Netherlands,NLD,NL,10,..,8,6,10
+New Caledonia,NCL,NC,..,..,8,..,..
+New Zealand,NZL,NZ,10,..,8,5,10
+Nicaragua,NIC,NI,5,9,5,3,8
+Niger,NER,NE,3,6,3,5,8
+Nigeria,NGA,NG,..,6,5,4,9
+Northern Mariana Islands,MNP,MP,..,..,..,..,..
+Norway,NOR,NO,10,..,9,7,10
+Oman,OMN,OM,9,7,7,..,2
+Pakistan,PAK,PK,6,6,4,6,9
+Palau,PLW,PW,6,..,7,..,..
+Panama,PAN,PA,8,10,7,3,10
+Papua New Guinea,PNG,PG,..,4,5,4,8
+Paraguay,PRY,PY,7,10,5,3,10
+Peru,PER,PE,8,10,6,4,10
+Philippines,PHL,PH,7,7,5,4,9
+Poland,POL,PL,10,..,7,6,10
+Portugal,PRT,PT,10,..,7,5,10
+Puerto Rico,PRI,PR,8,..,8,2,..
+Qatar,QAT,QA,9,9,9,4,1
+Romania,ROU,RO,9,9,7,5,10
+Russian Federation,RUS,RU,9,..,7,5,7
+Rwanda,RWA,RW,3,9,3,3,4
+Samoa,WSM,WS,7,9,5,4,..
+San Marino,SMR,SM,..,..,8,..,..
+Sao Tome and Principe,STP,ST,6,8,4,6,..
+Saudi Arabia,SAU,SA,8,5,7,..,1
+Senegal,SEN,SN,3,7,4,5,9
+Serbia,SRB,RS,10,8,6,4,9
+Seychelles,SYC,SC,9,8,7,3,..
+Sierra Leone,SLE,SL,3,6,3,5,9
+Singapore,SGP,SG,10,9,8,10,5
+Slovak Republic,SVK,SK,10,..,7,7,10
+Slovenia,SVN,SI,10,..,8,6,10
+Solomon Islands,SLB,SB,2,7,4,3,9
+Somalia,SOM,SO,..,4,1,4,8
+South Africa,ZAF,ZA,7,9,6,1,10
+South Sudan,SSD,SS,1,1,4,3,6
+Spain,ESP,ES,10,..,8,5,10
+Sri Lanka,LKA,LK,9,4,5,3,8
+St. Kitts and Nevis,KNA,KN,9,..,7,..,..
+St. Lucia,LCA,LC,8,9,6,4,..
+St. Martin (French part),MAF,MF,..,..,..,..,..
+St. Vincent and the Grenadines,VCT,VC,9,..,6,..,..
+Sudan,SDN,SD,3,4,4,5,5
+Suriname,SUR,SR,6,8,6,1,8
+Sweden,SWE,SE,10,..,9,6,10
+Switzerland,CHE,CH,10,..,9,6,10
+Syrian Arab Republic,SYR,SY,6,5,4,5,1
+Tajikistan,TJK,TJ,9,6,4,6,4
+Tanzania,TZA,TZ,..,8,..,5,7
+Thailand,THA,TH,8,8,6,4,4
+Timor-Leste,TLS,TL,5,6,5,5,9
+Togo,TGO,TG,4,7,3,3,5
+Tonga,TON,TO,9,8,5,4,..
+Trinidad and Tobago,TTO,TT,8,8,7,3,10
+Tunisia,TUN,TN,4,9,6,5,9
+Turkey,TUR,TR,9,9,7,4,4
+Turkmenistan,TKM,TM,..,8,6,6,2
+Turks and Caicos Islands,TCA,TC,..,..,8,..,..
+Tuvalu,TUV,TV,9,9,5,4,..
+Uganda,UGA,UG,3,9,3,4,5
+Ukraine,UKR,UA,9,7,5,6,7
+United Arab Emirates,ARE,AE,9,..,8,..,2
+United Kingdom,GBR,GB,10,..,8,5,10
+United States,USA,US,10,10,8,3,9
+Uruguay,URY,UY,9,9,7,4,10
+Uzbekistan,UZB,UZ,10,8,5,4,1
+Vanuatu,VUT,VU,5,8,5,5,..
+"Venezuela, RB",VEN,VE,8,8,7,4,4
+Vietnam,VNM,VN,8,7,4,5,2
+Virgin Islands (U.S.),VIR,VI,..,..,..,..,..
+West Bank and Gaza,PSE,PS,9,10,5,..,..
+"Yemen, Rep.",YEM,YE,6,4,3,5,6
+Zambia,ZMB,ZM,..,8,4,2,8
+Zimbabwe,ZWE,ZW,4,9,4,4,7
