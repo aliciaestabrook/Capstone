@@ -1,4 +1,4 @@
-Country Name,Country Code,alpha-2,schoolOECD,waste,lnyUN,GINIW,polity
+Country Name,Country Code,alpha-2,SchoolOECD,Waste,LnyUN,GINIW,Polity
 Afghanistan,AFG,AF,6,6,3,6,5
 Albania,ALB,AL,9,6,6,6,10
 Algeria,DZA,DZ,6,8,6,5,6
@@ -100,7 +100,7 @@ Jordan,JOR,JO,7,9,5,5,4
 Kazakhstan,KAZ,KZ,10,9,7,6,3
 Kenya,KEN,KE,4,8,4,4,10
 Kiribati,KIR,KI,9,5,4,5,..
-"Korea, Dem. People’s Rep.",PRK,KP,10,8,3,..,1
+"Korea, Dem. People√ïs Rep.",PRK,KP,10,8,3,..,1
 "Korea, Rep.",KOR,KR,10,10,8,6,9
 Kuwait,KWT,KW,9,9,8,..,2
 Kyrgyz Republic,KGZ,KG,10,9,4,6,9
