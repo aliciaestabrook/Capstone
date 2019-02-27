@@ -69,8 +69,8 @@
     </style>
 <body>
 <?php
-    include "menu.php";
- ?>
+	include"menu.php";
+?>
   <div id="maphead" >
     <span id="menu"></span>
   </div>
