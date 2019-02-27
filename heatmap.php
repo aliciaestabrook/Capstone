@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
     <head>
-		<title>Home Page</title>
+		<title>Heatmap</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="capstonestyle.css">
         <link href="https://fonts.googleapis.com/css?family=Dosis|Staatliches" rel="stylesheet">
@@ -68,7 +68,9 @@
           }
     </style>
 <body>
-
+<?php
+    include "menu.php";
+ ?>
   <div id="maphead" >
     <span id="menu"></span>
   </div>
