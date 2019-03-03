@@ -124,6 +124,7 @@
   		<p>Click on a country within the map below to view a bar chart that compares data for your chosen country with both the region and the world.</p>
 	</div>
 
+
   <div id="maphead" >
     <span id="menu"></span>
   </div>
