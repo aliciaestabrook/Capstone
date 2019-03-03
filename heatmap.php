@@ -10,6 +10,43 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
+    .accordion {
+  		background-color: #eee;
+  		color: #444;
+  		cursor: pointer;
+  		padding: 18px;
+  		width: 100%;
+  		border: none;
+  		text-align: left;
+  		outline: none;
+  		font-size: 15px;
+  		transition: 0.4s;
+	}
+
+	.active, .accordion:hover {
+  		background-color: #ccc;
+	}
+
+	.accordion:after {
+  		content: '\002B';
+  		color: #777;
+  		font-weight: bold;
+  		float: right;
+  		margin-left: 5px;
+	}
+
+	.active:after {
+  		content: "\2212";
+	}
+
+	.panel {
+  		padding: 0 18px;
+  		background-color: white;
+  		max-height: 0;
+  		overflow: hidden;
+  		transition: max-height 0.2s ease-out;
+	}
+    
     .countries {
             fill: none;
             stroke: #fff;
@@ -71,6 +108,22 @@
 <?php
     include "menu.php";
  ?>
+ <h2>Food Security Interactive Heatmap</h2>
+	<button class="accordion">Interacting with the Heatmap</button>
+	<div class="panel">
+  		<p>Select an attribute from the dropdown menu to the left to view filtered data for each country.</p>
+	</div>
+
+	<button class="accordion">Bar Chart</button>
+	<div class="panel">
+  		<p>Click on a country within the map below to view a bar chart that compares data for your chosen country with both the region and the world.</p>
+	</div>
+
+	<button class="accordion">Scatter Plot</button>
+	<div class="panel">
+  		<p>Click on a country within the map below to view a bar chart that compares data for your chosen country with both the region and the world.</p>
+	</div>
+
   <div id="maphead" >
     <span id="menu"></span>
   </div>
@@ -96,7 +149,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type='text/javascript' src='finaldraft5_m2.js'></script>
 
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
 
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
 </body>
 <footer id="foot" >
     Copyright &copy; 2019 - Capstone Group Project #1
