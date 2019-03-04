@@ -121,7 +121,7 @@
 
 	<button class="accordion">Scatter Plot</button>
 	<div class="panel">
-  		<p>Click on a country within the map below to view a bar chart that compares data for your chosen country with both the region and the world.</p>
+  		<p>Click on a country within the map below to view a scatterplot that compares data for your chosen country with both the region and the world.</p>
 	</div>
 
 
