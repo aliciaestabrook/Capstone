@@ -192,8 +192,8 @@ function ready(error, topo, params) {
                     ];
           //set margin, width, and height of bars
           const margin = 60;
-          const widthbar = 960 - 2 * margin;
-          const heightbar = 600 - 2 * margin;
+          const widthbar = 860 - 2 * margin;
+          const heightbar = 500 - 2 * margin;
           const svgbar = d3.select('#svgbar');
           const chartbar = svgbar.append('g')
             .attr('transform', `translate(${margin}, ${margin})`);
@@ -221,6 +221,8 @@ function ready(error, topo, params) {
             .enter()
             .append('rect')
             .attr("class", "bar")
+            .attr("fill", "#ffe6cc")
+            .attr("style", "outline: thin solid #994d00")
             .attr('x', (s) => xScale(s.country))
             .attr('y', (s) => yScale(s.value_bar))
             .attr('height', (s) => heightbar - yScale(s.value_bar))
