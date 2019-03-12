@@ -46,7 +46,7 @@
   		overflow: hidden;
   		transition: max-height 0.2s ease-out;
 	}
-    
+
     .countries {
             fill: none;
             stroke: #fff;
@@ -89,20 +89,48 @@
               position: absolute;
               margin-left: 3%;
             }
-          #svgmap {
+          #svgmap, #svgscatter, #svgbar {
             font-family: Arial, Helvetica, sans-serif;
             display: block;
+            margin:auto;
           }
           svg.banner {
             width: 100%; height: auto;
           }
-          #svgdiv {
-            height: 75%;
-            width: 75%;
-            margin-bottom: 5%;
+          #svgdiv, #bardiv, #scatterdiv {
+            height: 65%;
+            width: 65%;
+            /* margin-bottom: 5%; */
             margin-left: 5%;
             margin-right: 5%;
+            display: inline-block;
+            text-align: center;
           }
+          #bardiv #scatterdiv {
+            display: inline-block;
+            margin-left: 5%;
+            margin-right: 5%;
+            text-align: center;
+          }
+
+#svgscatter.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltipSct {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  /* pointer-events: none; */
+}
+</style>
     </style>
 <body>
 <?php
@@ -130,15 +158,31 @@
   </div>
 
   <!-- map div -->
-  <div id="svgdiv">
+<div class="centerdiv" style="text-align: center;">
+  <div id="svgdiv" >
     <svg id="svgmap" width="960" height="600" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet"></svg>
     <div class="tooltip"></div>
   </div>
 
-  <!-- bar chart div -->
-  <div id="bardiv">
-    <svg id="svgbar" width="960" height="600" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet"></svg>
+  <div id="select2" >
+    <span id="menu2"></span>
   </div>
+  <!-- bar chart div -->
+  <div id="bardiv" style="text-align: center">
+    <svg id="svgbar" width="660" height="300" viewBox="0 0 660 300" preserveAspectRatio="xMidYMid meet">
+    </svg>
+  </div>
+
+  <!-- scatter chart div -->
+  <div id="scatterdiv" >
+    <svg id="svgscatter" width="660" height="300" viewBox="0 0 660 300" preserveAspectRatio="xMidYMid meet">
+  </svg>
+    <div class="tooltipSct"></div>
+  </div>
+</div>
+  <div >
+  		<p>Click on a country within the map below to view a bar chart that compares data for your chosen country with both the region and the world.</p>
+	</div>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
@@ -148,9 +192,9 @@
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type='text/javascript' src='finaldraft5_m2.js'></script>
+    <script type='text/javascript' src='script2.js'></script>
 
-<script>
+<script>  
 var acc = document.getElementsByClassName("accordion");
 var i;
 
@@ -162,7 +206,7 @@ for (i = 0; i < acc.length; i++) {
       panel.style.maxHeight = null;
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
+    }
   });
 }
 </script>
