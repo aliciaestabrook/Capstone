@@ -215,12 +215,69 @@ function mousemovesc(d) {
         "<br/> Waste:" + world_waste + ")");
 }
 
+function radius(d){
+  if (d.country_name == bar_data[0].country) {
+    size = 4.5;
+    return size;
+  } else {
+    size = 3.5;
+    return size;
+  }
+}
+
+function opacity(d) {
+  if (xValueSct(d) == 0 || yValueSct(d)==0) {
+    return 0;
+  } else if (d.country_name == bar_data[0].country || d.country_code == bar_data[1].country || d.country_code == bar_data[2].country) {
+    return 1;
+  } else if (d.country_code == "World"){
+    return 1;
+  } else {
+    return 0.35;
+  }
+}
+
+function stroke(d){
+  if (d.country_name == bar_data[0].country) {
+    color = "#000";
+    return color;
+  } else {
+    color = "none";
+    return color;
+  }
+}
+
+function dotFill(d) {
+  if (d.waste <= 2) {
+    color = "#D45810";
+    return color;
+  } else if (d.waste > 2 && d.waste <= 4) {
+    color = "#D45810";
+    return color;
+  } else if (d.waste > 4 && d.waste <= 6) {
+    color = "#FBAF83";
+    return color;
+  } else if (d.waste > 6 && d.waste <= 8) {
+    color = "#D9C3B6";
+    return color;
+  } else if (d.waste > 8) {
+    color = "#8C7C72";
+    return color;
+  } else {
+    color = "#EFEDEB";
+    return color;
+  }
+}
+
 
 //declare variables for the
 var xValueSct = function(d) {
   d.lnyUN = lnyUN.get(d.id) || "0";
   return d.lnyUN;} // data -> value
 
+var yValueSct = function(d) {
+  d.waste = waste.get(d.id) || "0";
+  return d.waste;} // data -> value
 
 function mousemovesc1(d) {
     tooltipSct.classed("hidden",false)
@@ -316,6 +373,7 @@ function ready(error, topo, params) {
             .enter()
             .append('rect')
             .attr("class", "bar")
+            .attr("fill", (s) => colorScale(s.value_bar))
             .attr('x', (s) => xScaleBar(s.country))
             .attr('y', (s) => yScaleBar(s.value_bar))
             .attr('height', (s) => heightbar - yScaleBar(s.value_bar))
@@ -405,10 +463,10 @@ function ready(error, topo, params) {
       .enter().append("circle")
         .attr("class", "dot")
         .attr("id", (s)=> s.country)
-        .attr("r", 3.5)
+        .attr("r", 4.5)
         .attr("cx", (s)=> xScaleSct(s.gdp_bar))
         .attr("cy", (s)=> yScaleSct(s.waste_bar))
-        .style("fill", "#3897E1")
+        .style("fill", dotFill)
         .style("opacity", 1)
         .on("mousemove", mousemovesc)
         .on("mouseout", mouseoutsc);
@@ -418,21 +476,12 @@ function ready(error, topo, params) {
           .enter().append("circle")
             .attr("id", setCode)
             .attr("class", "dot")
-            .attr("r", 3.5)
+            .attr("r", radius)
             .attr("cx", xMapSct)
             .attr("cy", yMapSct)
-            .style("fill", "#3897E1")
-            .style("opacity", function(d) {
-              if (xValueSct(d) == 0 || yValueSct(d)==0) {
-                return 0;
-              } else if (d.country_name == bar_data[0].country || d.country_code == bar_data[1].country || d.country_code == bar_data[2].country) {
-                return 1;
-              } else if (d.country_code == "World"){
-                return 1;
-              } else {
-                return 0.1;
-              }
-            })
+            .style("fill", dotFill)
+            .style("opacity", opacity)
+            .style("stroke", stroke)
             .on("mousemove", function(d) {
               tooltipSct.classed("hidden",false)
               .style("top", (d3.event.pageY - 28) + "px")
@@ -601,6 +650,7 @@ function onchange() {
                   .enter()
                   .append('rect')
                   .attr("class", "bar")
+                  .attr("fill", (s) => colorScale(s.value_bar))
                   .attr('x', (s) => xScaleBar(s.country))
                   .attr('y', (s) => yScaleBar(s.value_bar))
                   .attr('height', (s) => heightbar - yScaleBar(s.value_bar))
@@ -685,7 +735,7 @@ function onchange() {
                 .enter().append("circle")
                   .attr("class", "dot")
                   .attr("id", (s)=> s.country)
-                  .attr("r", 3.5)
+                  .attr("r", 4.5)
                   .attr("cx", (s)=> xScaleSct(s.gdp_bar))
                   .attr("cy", (s)=> yScaleSct(s.value_bar))
                   .style("fill", "#3897E1")
@@ -702,17 +752,20 @@ function onchange() {
                       .attr("cx", xMapSct)
                       .attr("cy", yMapSct)
                       .style("fill", "#3897E1")
-                      .style("opacity", function(d) {
-                        if (xValueSct(d) == 0 || yValueSct(d)==0) {
-                          return 0;
-                        } else if (d.country_name == bar_data[0].country || d.country_code == bar_data[1].country || d.country_code == bar_data[2].country) {
-                          return 1;
-                        } else if (d.country_code == "World"){
-                          return 1;
-                        } else {
-                          return 0.1;
-                        }
-                      })
+                      .style("opacity", opacity)
+                      .style("stroke", stroke)
+
+                      // function(d) {
+                      //   if (xValueSct(d) == 0 || yValueSct(d)==0) {
+                      //     return 0;
+                      //   } else if (d.country_name == bar_data[0].country || d.country_code == bar_data[1].country || d.country_code == bar_data[2].country) {
+                      //     return 1;
+                      //   } else if (d.country_code == "World"){
+                      //     return 1;
+                      //   } else {
+                      //     return 0.1;
+                      //   }
+                      // })
                       .on("mousemove", mousemovesc1)
                       .on("mouseout", mouseoutsc);
           }) //end onclick
