@@ -271,21 +271,21 @@ function dotFill(d) {
 // }
 
 //calculate linear regression trend line
-function calcline(d){
-  xvalues = [];
-  yvalues = [];
-
-
-  d.forEach(function(d,i){
-    if (d.lnyUN > 0 && d[selectValue] > 0){
-      xvalues.push(d.lnyUN);
-      yvalues.push(d[selectValue]);
-    }
-  })
-    console.log("xvals", xvalues);
-    console.log("yvals", yvalues);
-}
-
+// function calcline(d){
+//   xvalues = [];
+//   yvalues = [];
+//
+//
+//   d.forEach(function(d,i){
+//     if (d.lnyUN > 0 && d[selectValue] > 0){
+//       xvalues.push(d.lnyUN);
+//       yvalues.push(d[selectValue]);
+//     }
+//   })
+//     console.log("xvals", xvalues);
+//     console.log("yvals", yvalues);
+// }
+//
 
 		// Takes 5 parameters:
     // (1) Your data
@@ -301,21 +301,6 @@ function calcLinear(d, x, y, minX, minY){
       //SLOPE//
       /////////
 
-      // function isNumber(obj) {
-      //   return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj);
-      // }
-      //
-      // function filterByID(item) {
-      //   if (isNumber(item.id) && item.id !== 0) {
-      //     return true;
-      //   }
-      //   // invalidEntries++;
-      //   return false;
-      // }
-      //
-      // var arrByID = d.filter(filterByID);
-      // console.log("array", arrByID);
-
 
       // Let n = the number of data points
       var n = d.length;
@@ -325,22 +310,6 @@ function calcLinear(d, x, y, minX, minY){
       var pts = [];
       d.forEach(function(d,i){
 
-      // xvalues = function(d) {
-      //     if (isNaN(d.lnyUN)) {
-      //     return 0;
-      //   } else {
-      //     return (d.lnyUN);
-      //   }
-      // };
-      //
-      // yvalues = function(d) {
-      //     if (isNaN(d[selectValue])) {
-      //     return 0;
-      //   } else {
-      //     return (d[selectValue]);
-      //   }
-      // };
-        // console.log(xvalues(d));
         var obj = {};
         obj.x = d[x];
         obj.y = d[y];
@@ -396,7 +365,9 @@ function calcLinear(d, x, y, minX, minY){
       // Plug the values you have calculated for e and f into the following equation for the y-intercept
       // y-intercept = b = (e - f) / n
       var b = (e - f) / n;
-      console.log("y iny", b);
+      console.log("y int", b);
+      console.log("y = ", m, "x + ", b)
+
 
 
 			// Print the equation below the chart
@@ -405,14 +376,24 @@ function calcLinear(d, x, y, minX, minY){
 
       // return an object of two points
       // each point is an object with an x and y coordinate
+      if (m<1) {
+        y2cal = (10 * m) + b;
+        x2cal = 10;
+      } else {
+        y2cal = 10;
+        x2cal = (10 - b) / m;
+      }
+
+
       return {
         ptA : {
-          x: minX,
+          x: 0,
           y: m * minX + b
         },
         ptB : {
-          y: minY,
-          x: (minY - b) / m
+          y: y2cal,
+          x: x2cal
+          // (10 - b) / m
         }
       }
       console.log(ptA);
@@ -457,7 +438,7 @@ var marginsct = {top: 70, right: 30, bottom: 30, left: 50},
 
     xScaleSct = d3.scaleLinear()
       .domain([0, 10])
-      .range([0, 500]), // value -> display  .domain([0, 10])
+      .range([0, 550]), // value -> display  .domain([0, 10])
     xMapSct = function(d) {
         return xScaleSct(xValueSct(d))
     ;}, // data -> display
@@ -465,7 +446,7 @@ var marginsct = {top: 70, right: 30, bottom: 30, left: 50},
 
     yScaleSct = d3.scaleLinear()
       .domain([0, 10])
-      .range([300, 0]),
+      .range([350, 0]),
     yMapSct = function(d) { return yScaleSct(yValueSct(d));}, // data -> display
     yAxisSct = d3.axisLeft().scale(yScaleSct).ticks(5);
 
@@ -587,28 +568,29 @@ function buildcharts(error, d) {
         .attr("padding-bottom", "5%")
         .attr("viewBox", "0 0 700 450");
     const chartbar = svgbar.append('g')
-      .attr('transform', `translate(100, 70)`);
+      .attr('transform', `translate(100, 50)`);
     //
     const yScaleBar = d3.scaleLinear()
-      .range([300, 0])
+      .range([350, 0])
       .domain([0, 10]);
 
     //x axis
     const xScaleBar = d3.scaleBand()
-      .range([0, 500])
+      .range([0, 550])
       .domain(bar_data.map((s) => s.country))
       .padding(0.25);
 
     //y axis
+    xaxbar = d3.axisLeft().scale(yScaleBar).ticks(5);
     chartbar.append('g')
       .attr('id', "yscalebar")
-      .call(d3.axisLeft(yScaleBar))
+      .call(xaxbar)
       .style("font-size", '0.95em');
 
     //x axis, labels
     chartbar.append('g')
       .attr("id", "labels")
-      .attr('transform', `translate(0, 300)`)
+      .attr('transform', `translate(0, 350)`)
       .call(d3.axisBottom(xScaleBar))
       .style("font-size", '0.95em');
 
@@ -621,7 +603,7 @@ function buildcharts(error, d) {
       .attr("fill", (s) => colorScale(s.value_bar))
       .attr('x', (s) => xScaleBar(s.country))
       .attr('y', (s) => yScaleBar(s.value_bar))
-      .attr('height', (s) => 300 - yScaleBar(s.value_bar))
+      .attr('height', (s) => 350 - yScaleBar(s.value_bar))
       .attr('width', xScaleBar.bandwidth());
   };
 
@@ -630,14 +612,6 @@ function buildcharts(error, d) {
 
       linevalues = [];
       yvalues = [];
-
-
-      // d.forEach(function(d,i){
-      //   if (d.lnyUN > 0 && d[selectValue] > 0){
-      //     xvalues.push(d.lnyUN);
-      //     yvalues.push(d[selectValue]);
-      //   }
-      // })
 
       data.forEach(function(d,i){
         var obj = {};
@@ -648,70 +622,11 @@ function buildcharts(error, d) {
           obj.y = +d[selectValue];
           obj.mult = obj.x*obj.y;
           linevalues.push(obj);
-          // xvalues.push(d.lnyUN);
-          // yvalues.push(d[selectValue]);
         }
       })
       console.log(linevalues);
-      //
-      //     yvalues.push(d[selectValue]);
-      //   }
-      // })
-        // console.log("xvals", xvalues);
-        // console.log("yvals", yvalues);
 
-        // dataline =  _.zipWith(xvalues, yvalues, (waste, selectvalueval) => (
-        //             {
-        //               x: waste,
-        //               y: selectvalueval
-        //             }
-        //           ))
-
-
-
-      // xvalues = function(d) {
-      //     if (isNaN(d.lnyUN)) {
-      //     return 0;
-      //   } else {
-      //     return xScaleSct(d.lnyUN);
-      //   }
-      // };
-      //
-      // yvalues = function(d) {
-      //     if ((d[selectValue]) === d[selectValue]) {
-      //     return yScaleSct(d[selectValue]);
-      //   } else {
-      //     return 0;
-      //   }
-      // };
-
-      minxdata = 0;
-      // xScaleSct(1);
-      // d3.min(d, function(d){
-      //   return d.lnyUN;
-      // });
-
-      minydata = 0;
-      // yScaleSct(1);
-
-      // d3.min(data, function(d){
-      //   return d[selectValue];
-      // });
-      // var calclinevals = calcline(d);
-      // console.log(xvalues(d));
-      //
-      var lg = calcLinear(linevalues, "x", "y", minxdata, minydata);
-      // console.log(lg.ptA);
-      // console.log(lg.ptB);
-
-      // var x = function(d) {
-      //     return xScaleSct(xValueSct(d))
-      // ;};
-      // // xScaleSct(d.lnyUN);
-  	  // var y = function(d) { return yScaleSct(yValueSct(d));};
-      // // yScaleSct(d[selectValue]);
-      // console.log(x, y);
-
+      var lg = calcLinear(linevalues, "x", "y", 0, 0);
 
       const svgSct = d3.select('#scatterdiv')
         .append('svg')
@@ -720,23 +635,20 @@ function buildcharts(error, d) {
           .attr("padding-bottom", "5%")
           .attr("viewBox", "0 0 700 450");
 
-        console.log("SCt", heightsct, widthsct);
       const chartSct = svgSct.append('g')
-        .attr("transform", "translate(100, 70)");
-        // marginsct.left + "," + marginsct.top + ")");
+        .attr("transform", "translate(50, 50)");
 
       // add the tooltip area to the webpage
       var tooltipSct = d3.select("div.tooltipSct");
       // x-axis
       chartSct.append("g")
          .attr("id", "xaxis")
-         .attr("transform", "translate(0, 300)")
-         // + heightsct*2.8 + ")")
+         .attr("transform", "translate(0, 350)")
          .call(xAxisSct)
          .style("font-size", '0.95em')
        .append("text")
          .attr("class", "caption")
-         .attr("x", 500)
+         .attr("x", 550)
          .attr("y", -6)
          .style("text-anchor", "end")
          .text("GDP Per Capita");
@@ -754,6 +666,19 @@ function buildcharts(error, d) {
           .style("text-anchor", "end")
           .text(title);
 
+      //draw regression line
+      x1 = xScaleSct(lg.ptA.x);
+      y1 = yScaleSct(lg.ptA.y);
+      x2 = xScaleSct(lg.ptB.x);
+      y2 = yScaleSct(lg.ptB.y);
+
+      chartSct.append("g")
+        .append("line")
+	        .attr("class", "regression")
+	        .attr("x1", x1)
+	        .attr("y1", y1)
+	        .attr("x2", x2)
+	        .attr("y2", y2);
 
         // draw dots
       chartSct.selectAll(".dot")
@@ -787,17 +712,7 @@ function buildcharts(error, d) {
           })
           .on("mousemove", mousemovesc)
           .on("mouseout", mouseoutsc);
-    //
-      console.log(lg.ptA.x);
-      chartSct.append("line")
-    	        .attr("class", "regression")
-    	        .attr("x1", xScaleSct(lg.ptA.x))
-    	        .attr("y1", yScaleSct(lg.ptA.y))
-    	        .attr("x2", xScaleSct(lg.ptB.x))
-    	        .attr("y2", yScaleSct(lg.ptB.y));
-
     })
-    //
 }
 
 //updates charts when new variable selected from second drop down
@@ -828,253 +743,6 @@ function updatecharts() {
 
 }
 
-// function buildcharts(error, d) {
-//
-//   if (error) throw error;
-//   console.log("buildcharts", selectValue);
-//   console.log("buildcharts", mapcountry);
-//   console.log("buildcharts", mapregion);
-//
-//   d3.select("#svgbar").selectAll("g").remove();
-//   d3.select("#svgscatter").selectAll("g").remove(); //remove existing scatter chart
-//   d3.select("#bardiv").selectAll("svg").remove();
-//   d3.select("#bardiv").selectAll("rect").remove();
-//   d3.select("#scatterdiv").selectAll("svg").remove();
-//   d3.select("#svgscatter").selectAll(".dot").remove();
-//
-//     console.log("div", getDivWidth('#bardiv'));
-//     console.log("div", getDivHeight('#bardiv'));
-//
-//       if (mapregion != "-") {
-//         new_id = mapregion;
-//         bar_data = [{country: mapcountry,
-//                   value_bar: (d[selectValue] = data.get(mapcode))},
-//                   {country: new_id,
-//                   value_bar: (d[selectValue] = data.get(new_id))},
-//                   {country: "World",
-//                   value_bar: (d[selectValue] = data.get("World"))}
-//                   ];
-//
-//     console.log("bardata", bar_data[0], bar_data[1], bar_data[2]);
-//         const marginbar = 70;
-//         const widthbar = 700;
-//         const heightbar = 450;
-//         const svgbar = d3.select('#bardiv')
-//           .append("svg")
-//             .attr("width", "100%")
-//             .attr("height", 450)
-//             .attr("padding-bottom", "5%")
-//             .attr("viewBox", "0 0 700 450");
-//         const chartbar = svgbar.append('g')
-//           .attr('transform', `translate(100, 70)`);
-//     //
-//         const yScaleBar = d3.scaleLinear()
-//           .range([300, 0])
-//           .domain([0, 10]);
-//
-//         const xScaleBar = d3.scaleBand()
-//           .range([0, 500])
-//           .domain(bar_data.map((s) => s.country))
-//           .padding(0.25);
-//
-//         chartbar.append('g')
-//           .attr('id', "yscalebar")
-//           .call(d3.axisLeft(yScaleBar))
-//           .style("font-size", '0.95em');
-//
-//         chartbar.append('g')
-//           .attr("id", "labels")
-//           .attr('transform', `translate(0, 300)`)
-//           .call(d3.axisBottom(xScaleBar))
-//           .style("font-size", '0.95em');
-//
-//         chartbar.selectAll()
-//           .data(bar_data)
-//           .enter()
-//           .append('rect')
-//           .attr("class", "bar")
-//           .attr("fill", (s) => colorScale(s.value_bar))
-//           .attr('x', (s) => xScaleBar(s.country))
-//           .attr('y', (s) => yScaleBar(s.value_bar))
-//           .attr('height', (s) => 300 - yScaleBar(s.value_bar))
-//           .attr('width', xScaleBar.bandwidth());
-//       };
-//     //
-//     d3.csv(hostdata,function(data){
-//
-//       linevalues = [];
-//       yvalues = [];
-//
-//
-//       // d.forEach(function(d,i){
-//       //   if (d.lnyUN > 0 && d[selectValue] > 0){
-//       //     xvalues.push(d.lnyUN);
-//       //     yvalues.push(d[selectValue]);
-//       //   }
-//       // })
-//
-//       data.forEach(function(d,i){
-//         var obj = {};
-//         if (isNaN(d.lnyUN) || isNaN(d[selectValue])){
-//           return false;
-//         } else {
-//           obj.x = +d.lnyUN;
-//           obj.y = +d[selectValue];
-//           obj.mult = obj.x*obj.y;
-//           linevalues.push(obj);
-//           // xvalues.push(d.lnyUN);
-//           // yvalues.push(d[selectValue]);
-//         }
-//       })
-//       console.log(linevalues);
-//       //
-//       //     yvalues.push(d[selectValue]);
-//       //   }
-//       // })
-//         // console.log("xvals", xvalues);
-//         // console.log("yvals", yvalues);
-//
-//         // dataline =  _.zipWith(xvalues, yvalues, (waste, selectvalueval) => (
-//         //             {
-//         //               x: waste,
-//         //               y: selectvalueval
-//         //             }
-//         //           ))
-//
-//
-//
-//       // xvalues = function(d) {
-//       //     if (isNaN(d.lnyUN)) {
-//       //     return 0;
-//       //   } else {
-//       //     return xScaleSct(d.lnyUN);
-//       //   }
-//       // };
-//       //
-//       // yvalues = function(d) {
-//       //     if ((d[selectValue]) === d[selectValue]) {
-//       //     return yScaleSct(d[selectValue]);
-//       //   } else {
-//       //     return 0;
-//       //   }
-//       // };
-//
-//       minxdata = 0;
-//       // xScaleSct(1);
-//       // d3.min(d, function(d){
-//       //   return d.lnyUN;
-//       // });
-//
-//       minydata = 0;
-//       // yScaleSct(1);
-//
-//       // d3.min(data, function(d){
-//       //   return d[selectValue];
-//       // });
-//       // var calclinevals = calcline(d);
-//       // console.log(xvalues(d));
-//       //
-//       var lg = calcLinear(linevalues, "x", "y", minxdata, minydata);
-//       // console.log(lg.ptA);
-//       // console.log(lg.ptB);
-//
-//       // var x = function(d) {
-//       //     return xScaleSct(xValueSct(d))
-//       // ;};
-//       // // xScaleSct(d.lnyUN);
-//   	  // var y = function(d) { return yScaleSct(yValueSct(d));};
-//       // // yScaleSct(d[selectValue]);
-//       // console.log(x, y);
-//
-//
-//       const svgSct = d3.select('#scatterdiv')
-//         .append('svg')
-//           .attr("width", "100%")
-//           .attr("height", 450)
-//           .attr("padding-bottom", "5%")
-//           .attr("viewBox", "0 0 700 450");
-//
-//         console.log("SCt", heightsct, widthsct);
-//       const chartSct = svgSct.append('g')
-//         .attr("transform", "translate(100, 70)");
-//         // marginsct.left + "," + marginsct.top + ")");
-//
-//       // add the tooltip area to the webpage
-//       var tooltipSct = d3.select("div.tooltipSct");
-//       // x-axis
-//       chartSct.append("g")
-//          .attr("id", "xaxis")
-//          .attr("transform", "translate(0, 300)")
-//          // + heightsct*2.8 + ")")
-//          .call(xAxisSct)
-//          .style("font-size", '0.95em')
-//        .append("text")
-//          .attr("class", "caption")
-//          .attr("x", 500)
-//          .attr("y", -6)
-//          .style("text-anchor", "end")
-//          .text("GDP Per Capita");
-//
-//          // y-axis
-//       chartSct.append("g")
-//           .attr("id", "yaxis")
-//           .call(yAxisSct)
-//           .style("font-size", '0.95em')
-//         .append("text")
-//           .attr("class", "caption")
-//           .attr("transform", "rotate(-90)")
-//           .attr("y", 6)
-//           .attr("dy", ".71em")
-//           .style("text-anchor", "end")
-//           .text(title);
-//
-//
-//         // draw dots
-//       chartSct.selectAll(".dot")
-//           .data(data)
-//         .enter().append("circle")
-//           .attr("class", "dot")
-//           .attr("id", function (d) {
-//             return d["Country Code"];
-//           })
-//           .attr("r", radius)
-//           .attr("cx", (d)=> xScaleSct(d.lnyUN))
-//           .attr("cy", (d)=> yScaleSct(d[selectValue]))
-//           .style("fill", dotFill)
-//           .style("opacity", function(d){
-//             if (d["Country Name"] == bar_data[0].country) {
-//               opacity = 1;
-//               return opacity;
-//             } else if (d["Country Name"] == bar_data[1].country) {
-//               opacity = 1;
-//               return opacity;
-//             } else if (d["Country Code"] == bar_data[2].country) {
-//               opacity = 1;
-//               return opacity;
-//             } else if (isNaN(d.lnyUN) || isNaN(d[selectValue])) {
-//               opacity = 0;
-//               return opacity;
-//             } else {
-//               opacity = 0.25;
-//               return opacity;
-//             }
-//           })
-//           .on("mousemove", mousemovesc)
-//           .on("mouseout", mouseoutsc);
-//     //
-//       console.log(lg.ptA.x);
-//       chartSct.append("line")
-//     	        .attr("class", "regression")
-//     	        .attr("x1", xScaleSct(lg.ptA.x))
-//     	        .attr("y1", yScaleSct(lg.ptA.y))
-//     	        .attr("x2", xScaleSct(lg.ptB.x))
-//     	        .attr("y2", yScaleSct(lg.ptB.y));
-//
-//     })
-//     //
-//
-//
-// }
 
 //what happens when a new attribute is selected from main map menu: repopulate map with new data
 function onchange() {
