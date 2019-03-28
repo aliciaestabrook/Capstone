@@ -109,34 +109,6 @@ function setReg(d) {
   d.region = region.get(d.id) || 0;
   return d.region;
 }
-// function setPol(d) {
-//   d.polity = polity.get(d.id) || 0;
-//   return d.polity;
-// }
-// function setln(d) {
-//   d.lnyUN = lnyUN.get(d.id) || 0;
-//   return d.lnyUN;
-// }
-// function setSchool(d) {
-//   d.schoolOECD = schoolOECD.get(d.id) || 0;
-//   return d.schoolOECD;
-// }
-// function setName(d) {
-//   d.country_name = country_name.get(d.id) || 0;
-//   return d.country_name;
-// }
-// function setGin(d) {
-//   d.gin = gin.get(d.id) || 0;
-//   return d.gin;
-// }
-// function setCode(d) {
-//   d.country_code = code.get(d.id) || 0;
-//   return d.country_code;
-// }
-// function setWaste(d) {
-//   d.waste = waste.get(d.id) || 0;
-//   return d.waste;
-// }
 
 //function to occur on .mousemove event on the map
 function mousemovef(d){
@@ -232,7 +204,7 @@ function mousemovesc(d) {
 //set radius of circles for scatterplot
 function radius(d){
   if (d["Country Name"] == bar_data[0].country || d["Country Code"] == bar_data[1].country || d["Country Code"] == bar_data[2].country) {
-    size = 5.5;
+    size = 7.5;
     return size;
   } else {
     size = 3.5;
@@ -263,29 +235,6 @@ function dotFill(d) {
   }
 }
 
-// function mapFill (d){
-//   // Pull data for this country
-//   d[selectValue] = data.get(d.id) || 0;
-//   // Set the color
-//   return colorScale(d[selectValue]);
-// }
-
-//calculate linear regression trend line
-// function calcline(d){
-//   xvalues = [];
-//   yvalues = [];
-//
-//
-//   d.forEach(function(d,i){
-//     if (d.lnyUN > 0 && d[selectValue] > 0){
-//       xvalues.push(d.lnyUN);
-//       yvalues.push(d[selectValue]);
-//     }
-//   })
-//     console.log("xvals", xvalues);
-//     console.log("yvals", yvalues);
-// }
-//
 
 		// Takes 5 parameters:
     // (1) Your data
@@ -401,25 +350,25 @@ function calcLinear(d, x, y, minX, minY){
 }
 
 
-function getDivWidth (div) {
-  var widthdiv = d3.select(div)
-    // get the width of div element
-    .style('width')
-    // take of 'px'
-    .slice(0, -2)
-  // return as an integer
-  return Math.round(Number(widthdiv))
-}
-
-function getDivHeight (div) {
-  var heightdiv = d3.select(div)
-    // get the width of div element
-    .style('height')
-    // take of 'px'
-    .slice(0, -2)
-  // return as an integer
-  return Math.round(Number(heightdiv))
-}
+// function getDivWidth (div) {
+//   var widthdiv = d3.select(div)
+//     // get the width of div element
+//     .style('width')
+//     // take of 'px'
+//     .slice(0, -2)
+//   // return as an integer
+//   return Math.round(Number(widthdiv))
+// }
+//
+// function getDivHeight (div) {
+//   var heightdiv = d3.select(div)
+//     // get the width of div element
+//     .style('height')
+//     // take of 'px'
+//     .slice(0, -2)
+//   // return as an integer
+//   return Math.round(Number(heightdiv))
+// }
 
 //declare variables for the scatterplot
 var xValueSct = function(d) {
@@ -433,8 +382,8 @@ var yValueSct = function(d) {
 }  // data -> value
 
 var marginsct = {top: 70, right: 30, bottom: 30, left: 50},
-    widthsct = getDivWidth("#scatterdiv"),
-    heightsct = getDivHeight("#scatterdiv");
+    // widthsct = getDivWidth("#scatterdiv"),
+    // heightsct = getDivHeight("#scatterdiv");
 
     xScaleSct = d3.scaleLinear()
       .domain([0, 10])
@@ -479,9 +428,20 @@ $(window).on("resize", function() {
   sct_chart.attr("height", Math.round((targetWidth_sct / aspect_sct)));
 }).trigger("resize");
 
+//Table svg
+var table_chart = $("#svgtable"),
+  aspect_table = table_chart.width() / table_chart.height(),
+  container_table = table_chart.parent();
+$(window).on("resize", function() {
+  var targetWidth_table = container_table.width();
+  table_chart.attr("width", (targetWidth_table * .8));
+  table_chart.attr("height", Math.round((targetWidth_table / aspect_table)*0.8));
+}).trigger("resize");
 
 //function called when user clicks on a country in the map
 function createcharts(d){
+  d3.select("#chartwrapper").classed("hidden", false);
+
   //on click, scroll down to details in section below
   $('html,body').animate({
         scrollTop: $("#chartwrapper").offset().top},
@@ -489,11 +449,16 @@ function createcharts(d){
 
   //remove second dropdown menu to start from scratch
   d3.select("#menu2").selectAll("select").remove();
+  d3.select("#chartheader").selectAll().remove();
+  d3.select("#scrollup").selectAll("button").remove();
+
   //set background color of details section
   d3.select("#chartwrapper").style("background-color", "#F9F8F8");
+  d3.select("#scrollup").classed("hidden", false);
+
 
   //build second drop down menu for details
-  var data2 = ["Update Charts Below With New Attribute", "schoolOECD", "waste", "lnyUN", "GINIW", "polity"];
+  var data2 = ["Update Charts Below", "schoolOECD", "waste", "lnyUN", "GINIW", "polity"];
   var select2 = d3.select('#menu2')
     .attr("margin-top", "14%")
     .append('select')
@@ -510,6 +475,7 @@ function createcharts(d){
       d.country_code = code.get(d.id) || "-";
       d.country_name = country_name.get(d.id) || "-";
       d.region = region.get(d.id) || "-";
+
       mapcountry = d.country_name;
       mapregion = d.region;
       mapcode = d.country_code;
@@ -519,6 +485,8 @@ function createcharts(d){
   console.log("country", mapcountry);
   console.log("reg", mapregion);
   console.log("code", mapcode);
+  // console.log("region", fullregion);
+
 
   //reload data, call fxn buildcharts
   d3.queue()
@@ -544,6 +512,24 @@ function buildcharts(error, d) {
   d3.select("#bardiv").selectAll("rect").remove();
   d3.select("#scatterdiv").selectAll("svg").remove();
   d3.select("#svgscatter").selectAll(".dot").remove();
+  d3.select("#chartheader").selectAll("p").remove();
+  d3.select("#chartheader").selectAll("hr").remove();
+  d3.select("#scrollup").selectAll("button").remove();
+
+
+  d3.select("#chartheader")
+    .append("p")
+      .attr("id", "titleheader")
+      .html(title)
+  d3.select("#chartheader")
+    .append("p")
+      .attr("id", "geoheader")
+      .html(mapcountry + ", " + mapregion);
+  d3.select("#chartheader")
+    .append("hr")
+      .attr("id", "hr");
+
+
 
   //create object to hold the bar chart data - country, region, and world values
   if (mapregion != "-") {
@@ -585,14 +571,14 @@ function buildcharts(error, d) {
     chartbar.append('g')
       .attr('id', "yscalebar")
       .call(xaxbar)
-      .style("font-size", '0.95em');
+      .style("font-size", '1.2em');
 
     //x axis, labels
     chartbar.append('g')
       .attr("id", "labels")
       .attr('transform', `translate(0, 350)`)
       .call(d3.axisBottom(xScaleBar))
-      .style("font-size", '0.95em');
+      .style("font-size", '1.2em');
 
     //bars
     chartbar.selectAll()
@@ -605,7 +591,70 @@ function buildcharts(error, d) {
       .attr('y', (s) => yScaleBar(s.value_bar))
       .attr('height', (s) => 350 - yScaleBar(s.value_bar))
       .attr('width', xScaleBar.bandwidth());
+
+    xlabel = function(s) {
+      valuebar = s.value_bar;
+
+      if (isNaN(s.value_bar)) {
+        valuebar_round = " ";
+      } else {
+        valuebar_round = (Math.floor(valuebar * 100) / 100 );
+      }
+
+      return valuebar_round;
+    }
+
+    chartbar.selectAll()
+      .data(bar_data)
+      .enter()
+      .append('text')
+        .attr("id","datalabels")
+        .text(xlabel)
+        .style("font-size", '1.3em')
+        .style("color", 'white')
+        .style("font-weight", 'bold')
+        .attr("x", (s) => xScaleBar(s.country)+ 47)
+        .attr("y", (s) => yScaleBar(s.value_bar) + 30);
+
   };
+
+
+  //Data table test
+var tabulate = function (data,columns) {
+ var table = d3.select('body').append('table')
+ var thead = table.append('tablediv')
+ var tbody = table.append('tbody')
+
+ thead.append('tr')
+   .selectAll('th')
+     .data(columns)
+     .enter()
+   .append('th')
+     .text(function (d) { return d })
+
+ var rows = tbody.selectAll('tr')
+     .data(data)
+     .enter()
+   .append('tr')
+
+ var cells = rows.selectAll('td')
+     .data(function(row) {
+       return columns.map(function (column) {
+         return { column: column, value: row[column] }
+       })
+     })
+     .enter()
+   .append('td')
+     .text(function (d) { return d.value })
+
+ return table;
+}
+
+d3.csv('milestone2.csv',function (data) {
+ var columns = ['waste','GINIW','polity','lnyUN']
+ tabulate(data,columns)
+})
+
 
   //reload data for scatter chart **currently in progress**
   d3.csv(hostdata,function(data){
@@ -645,7 +694,7 @@ function buildcharts(error, d) {
          .attr("id", "xaxis")
          .attr("transform", "translate(0, 350)")
          .call(xAxisSct)
-         .style("font-size", '0.95em')
+         .style("font-size", '1.2em')
        .append("text")
          .attr("class", "caption")
          .attr("x", 550)
@@ -657,7 +706,7 @@ function buildcharts(error, d) {
       chartSct.append("g")
           .attr("id", "yaxis")
           .call(yAxisSct)
-          .style("font-size", '0.95em')
+          .style("font-size", '1.2em')
         .append("text")
           .attr("class", "caption")
           .attr("transform", "rotate(-90)")
@@ -713,6 +762,19 @@ function buildcharts(error, d) {
           .on("mousemove", mousemovesc)
           .on("mouseout", mouseoutsc);
     })
+
+  d3.select("#scrollup")
+    .append("button")
+      .attr("id", "scrolluplink")
+      .text("Scroll up to map")
+      .on("click", function(){
+        $('html,body').animate({
+              scrollTop: $("#heading").offset().top},
+              'slow');
+
+      });
+
+
 }
 
 //updates charts when new variable selected from second drop down
@@ -732,6 +794,11 @@ function updatecharts() {
   d3.select("#svgbar").selectAll("rect").remove();
   d3.select("#svgscatter").selectAll("g").remove();
   d3.select("#svgscatter").selectAll(".dot").remove();
+  d3.select("#chartheader").selectAll("p").remove();
+  d3.select("#chartheader").selectAll("hr").remove();
+  d3.select("#scrollup").selectAll("button").remove();
+
+
 
   //reload data
   d3.queue()
@@ -760,8 +827,11 @@ function onchange() {
   d3.select("#bardiv").selectAll("rect").remove();
   d3.select("#scatterdiv").selectAll("svg").remove();
   d3.select("#menu2").selectAll("select").remove();
+  d3.select("#chartheader").selectAll("p").remove();
+  d3.select("#chartheader").selectAll("hr").remove();
+  d3.select("#scrollup").selectAll("button").remove();
 
-
+  d3.select("#chartwrapper").classed("hidden", true);
   // // Load external data and boot
   d3.queue()
     .defer(d3.json, "https://enjalot.github.io/wwsd/data/world/world-110m.geojson")
@@ -778,15 +848,15 @@ function ready(error, topo, info) {
   //map title
   svg.append("text")
     .attr("x", (width/2))
-    .attr("y", 35)
-    .attr("font-size", "24px")
+    .attr("y", 55)
+    .attr("font-size", "36px")
     .attr("text-anchor", "middle")
     .text(setTitle)
 
   // // Legend
   var g = svg.append("g")
     .attr("class", "legendThreshold")
-    .attr("transform", "translate(90,300)");
+    .attr("transform", "translate(30,340)");
   g.append("text")
     .attr("class", "caption")
     .attr("x", 0)
@@ -804,6 +874,7 @@ function ready(error, topo, info) {
 
   svg.append("g")
     .attr("class", "countries")
+    .attr("transform", "translate(0,60)")
     .selectAll("path")
     .data(topo.features)
     .enter().append("path")
