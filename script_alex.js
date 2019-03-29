@@ -451,6 +451,8 @@ function createcharts(d){
   d3.select("#menu2").selectAll("select").remove();
   d3.select("#chartheader").selectAll().remove();
   d3.select("#scrollup").selectAll("button").remove();
+  d3.select("#tablediv").selectAll("table").remove();
+
 
   //set background color of details section
   d3.select("#chartwrapper").style("background-color", "#F9F8F8");
@@ -515,6 +517,7 @@ function buildcharts(error, d) {
   d3.select("#chartheader").selectAll("p").remove();
   d3.select("#chartheader").selectAll("hr").remove();
   d3.select("#scrollup").selectAll("button").remove();
+  d3.select("#tablediv").selectAll("table").remove();
 
 
   d3.select("#chartheader")
@@ -621,33 +624,29 @@ function buildcharts(error, d) {
 
   //Data table test
 var tabulate = function (data,columns) {
- var table = d3.select('body').append('table')
- var thead = table.append('tablediv')
- var tbody = table.append('tbody')
+ var thead = d3.select('#tablediv').append('table');
 
- thead.append('tr')
-   .selectAll('th')
-     .data(columns)
-     .enter()
-   .append('th')
-     .text(function (d) { return d })
+  thead.selectAll('th')
+    .data(columns)
+    .enter()
+    .append('th')
+    .text(function (d) { return d });
 
- var rows = tbody.selectAll('tr')
-     .data(data)
-     .enter()
-   .append('tr')
+  var rows = thead.selectAll('tr')
+    .data(data)
+    .enter()
+    .append('tr');
 
- var cells = rows.selectAll('td')
-     .data(function(row) {
-       return columns.map(function (column) {
-         return { column: column, value: row[column] }
-       })
-     })
-     .enter()
-   .append('td')
-     .text(function (d) { return d.value })
+  var cells = rows.selectAll('td')
+    .data(function(row) {
+      return columns.map(function (column) {
+        return { column: column, value: row[column] }
+      })
+    })
+    .enter()
+    .append('td')
+    .text(function (d) { return d.value });
 
- return table;
 }
 
 d3.csv('milestone2.csv',function (data) {
@@ -797,6 +796,7 @@ function updatecharts() {
   d3.select("#chartheader").selectAll("p").remove();
   d3.select("#chartheader").selectAll("hr").remove();
   d3.select("#scrollup").selectAll("button").remove();
+  d3.select("#tablediv").selectAll("table").remove();
 
 
 
@@ -830,6 +830,8 @@ function onchange() {
   d3.select("#chartheader").selectAll("p").remove();
   d3.select("#chartheader").selectAll("hr").remove();
   d3.select("#scrollup").selectAll("button").remove();
+  d3.select("#tablediv").selectAll("table").remove();
+
 
   d3.select("#chartwrapper").classed("hidden", true);
   // // Load external data and boot
