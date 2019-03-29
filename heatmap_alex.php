@@ -201,6 +201,13 @@ button:focus {
 button:active {
     transform: scale(0.99);
 }
+
+table {
+  width: 80%;
+  margin: auto;
+  font-size: 1.2em;
+}
+
 </style>
 <body>
 <?php
@@ -276,6 +283,10 @@ button:active {
           <p> this is where the table would go! </p>
             <div id="tablediv" style="text-align: center; margin-bottom:5%; background-color: #F9F8F8;" height="600" class="chartcontainer col-sm-6">
             </div>
+
+            <div class="col-sm-6">
+            </div>
+
         </div>
   </div>
 
